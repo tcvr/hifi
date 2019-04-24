@@ -26,16 +26,6 @@ Item {
     width: hmdActive ? audio.width : audioApplication.width;
     height: hmdActive ? audio.height : audioApplication.height;
 
-    Timer {
-        id: hmdActiveCheckTimer;
-        interval: 500;
-        repeat: true;
-        onTriggered: {
-            root.hmdActive = HMD.active;
-        }
- 
-    }
-
     HifiAudio.MicBar {
         id: audio;
         visible: AvatarInputs.showAudioTools && root.hmdActive;
