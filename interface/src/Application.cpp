@@ -155,7 +155,8 @@
 #include <RenderableEntityItem.h>
 #include <RenderableTextEntityItem.h>
 #include <RenderableWebEntityItem.h>
-#include <material-networking/MaterialCache.h>
+#include <StencilMaskPass.h>
+#include <procedural/ProceduralMaterialCache.h>
 #include "recording/ClipCache.h"
 
 #include "AudioClient.h"
@@ -2013,7 +2014,7 @@ Application::Application(int& argc, char** argv, QElapsedTimer& startupTimer, bo
 
     EntityTreeRenderer::setAddMaterialToAvatarOperator([](const QUuid& avatarID, graphics::MaterialLayer material, const std::string& parentMaterialName) {
         auto avatarManager = DependencyManager::get<AvatarManager>();
-        auto avatar = avatarManager->getAvatarBySessionID(avatarID);
+        auto avatar = static_pointer_cast<Avatar>(avatarManager->getAvatarBySessionID(avatarID));
         if (avatar) {
             avatar->addMaterial(material, parentMaterialName);
             return true;
@@ -2022,13 +2023,15 @@ Application::Application(int& argc, char** argv, QElapsedTimer& startupTimer, bo
     });
     EntityTreeRenderer::setRemoveMaterialFromAvatarOperator([](const QUuid& avatarID, graphics::MaterialPointer material, const std::string& parentMaterialName) {
         auto avatarManager = DependencyManager::get<AvatarManager>();
-        auto avatar = avatarManager->getAvatarBySessionID(avatarID);
+        auto avatar = static_pointer_cast<Avatar>(avatarManager->getAvatarBySessionID(avatarID));
         if (avatar) {
             avatar->removeMaterial(material, parentMaterialName);
             return true;
         }
         return false;
     });
+    Procedural::opaqueStencil = [](gpu::StatePointer state) { PrepareStencil::testMaskDrawShape(*state); };
+    Procedural::transparentStencil = [](gpu::StatePointer state) { PrepareStencil::testMask(*state); };
 
     EntityTree::setGetEntityObjectOperator([this](const QUuid& id) -> QObject* {
         auto entities = getEntities();
@@ -7077,10 +7080,6 @@ void Application::clearDomainOctreeDetails(bool clearAll) {
 
     // reset the model renderer
     clearAll ? getEntities()->clear() : getEntities()->clearDomainAndNonOwnedEntities();
-
-    auto skyStage = DependencyManager::get<SceneScriptingInterface>()->getSkyStage();
-
-    skyStage->setBackgroundMode(graphics::SunSkyStage::SKY_DEFAULT);
 
     DependencyManager::get<AnimationCache>()->clearUnusedResources();
     DependencyManager::get<SoundCache>()->clearUnusedResources();
