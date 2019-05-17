@@ -647,7 +647,7 @@ void RenderDeferred::run(const RenderContextPointer& renderContext, const Inputs
 void DefaultLightingSetup::run(const RenderContextPointer& renderContext) {
 
     if (!_defaultLight || !_defaultBackground) {
-        auto defaultSkyboxURL = PathUtils::resourcesUrl() + "images/Default-Sky-9-cubemap/Default-Sky-9-cubemap.texmeta.json";
+        auto defaultSkyboxURL = PathUtils::resourcesUrl() + "images/Default-Sky-9-cubemap/Default-Sky-9-cubemap.jpg"; // Default - Sky - 9 - cubemap.texmeta.json ";
 
         if (!_defaultSkyboxNetworkTexture) {
             PROFILE_RANGE(render, "Process Default Skybox");

@@ -31,6 +31,7 @@ var DELAY_FOR_30HZ = 33; // milliseconds
 
 var TABLET_MATERIAL_ENTITY_NAME = 'Tablet-Material-Entity';
 
+var FIX_TABLET_IN_SPACE = true; // CPM - OPTION
 
 // will need to be recaclulated if dimensions of fbx model change.
 var TABLET_NATURAL_DIMENSIONS = {x: 32.083, y: 48.553, z: 2.269};
@@ -129,11 +130,14 @@ WebTablet = function (url, width, dpi, hand, location, visible) {
         loadPriority: 10.0, // for overlay
         grab: { grabbable: true },
         dimensions: { x: tabletWidth, y: tabletHeight, z: tabletDepth },
-        parentID: MyAvatar.SELF_ID,
+        // parentID: MyAvatar.SELF_ID, // CPM Moved to FIX TABLET IN SPACE check below
         visible: visible,
         isGroupCulled: true
     };
 
+    if (!FIX_TABLET_IN_SPACE) {
+        tabletProperties.parentID = MyAvatar.SELF_ID;
+    }
     // compute position, rotation & parentJointIndex of the tablet
     this.calculateTabletAttachmentProperties(hand, true, tabletProperties);
     if (location) {
@@ -349,6 +353,7 @@ WebTablet.prototype.destroy = function () {
 };
 
 WebTablet.prototype.geometryChanged = function (geometry) {
+    if (FIX_TABLET_IN_SPACE) return; // CPM Early Out
     if (!HMD.active && HMD.tabletID) {
         var tabletProperties = {};
         // compute position, rotation & parentJointIndex of the tablet
@@ -459,6 +464,7 @@ WebTablet.prototype.calculateTabletAttachmentProperties = function (hand, useMou
 };
 
 WebTablet.prototype.onHmdChanged = function () {
+    if (FIX_TABLET_IN_SPACE) return; // CPM return out.
     if (!HMD.tabletID) {
         return;
     }

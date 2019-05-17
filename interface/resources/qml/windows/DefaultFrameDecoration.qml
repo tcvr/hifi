@@ -32,7 +32,7 @@ Decoration {
             return;
         }
         root.frameMargin = 18
-        titleText.size = hifi.fontSizes.overlayTitle * 2
+        titleText.size = hifi.fontSizes.overlayTitle * 2 // CPM Can we use this to change the title text size on the main application? 
         root.iconSize = hifi.dimensions.frameIconSize * 2
     }
 

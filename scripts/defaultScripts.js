@@ -18,21 +18,21 @@ var DEFAULT_SCRIPTS_COMBINED = [
     "system/audio.js",
     "system/hmd.js",
     "system/menu.js",
-    "system/bubble.js",
+    //"system/bubble.js", // CPM
     "system/snapshot.js",
     "system/pal.js", // "system/mod.js", // older UX, if you prefer
     "system/avatarapp.js",
     "system/makeUserConnection.js",
     "system/tablet-goto.js",
-    "system/marketplaces/marketplaces.js",
+   // "system/marketplaces/marketplaces.js", // CPM
     "system/notifications.js",
-    "system/commerce/wallet.js",
-    "system/edit.js",
+    //"system/commerce/wallet.js", // CPM
+   // "system/edit.js", // CPM
     "system/dialTone.js",
     "system/firstPersonHMD.js",
     "system/tablet-ui/tabletUI.js",
     "system/emote.js",
-    "system/miniTablet.js",
+    // "system/miniTablet.js", // CPM
     "system/audioMuteOverlay.js"
 ];
 var DEFAULT_SCRIPTS_SEPARATE = [

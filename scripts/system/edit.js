@@ -145,7 +145,7 @@ var MENU_EASE_ON_FOCUS = "Ease Orientation on Focus";
 var MENU_SHOW_LIGHTS_AND_PARTICLES_IN_EDIT_MODE = "Show Lights and Particle Systems in Create Mode";
 var MENU_SHOW_ZONES_IN_EDIT_MODE = "Show Zones in Create Mode";
 
-var MENU_CREATE_ENTITIES_GRABBABLE = "Create Entities As Grabbable (except Zones, Particles, and Lights)";
+// var MENU_CREATE_ENTITIES_GRABBABLE = "Create Entities As Grabbable (except Zones, Particles, and Lights)"; // CPM I reject this feature.
 var MENU_ALLOW_SELECTION_LARGE = "Allow Selecting of Large Models";
 var MENU_ALLOW_SELECTION_SMALL = "Allow Selecting of Small Models";
 var MENU_ALLOW_SELECTION_LIGHTS = "Allow Selecting of Lights";
@@ -560,12 +560,12 @@ var toolBar = (function () {
 
             if (!properties.grab) {
                 properties.grab = {};
-                if (Menu.isOptionChecked(MENU_CREATE_ENTITIES_GRABBABLE) &&
-                    !(properties.type === "Zone" || properties.type === "Light" || properties.type === "ParticleEffect")) {
-                    properties.grab.grabbable = true;
-                } else {
+                //if (Menu.isOptionChecked(MENU_CREATE_ENTITIES_GRABBABLE) && // CPM I reject this feature
+                //    !(properties.type === "Zone" || properties.type === "Light" || properties.type === "ParticleEffect")) { // CPM I reject this feature
+                //    properties.grab.grabbable = true; // CPM I reject this feature
+                //} else { // CPM I reject this feature
                     properties.grab.grabbable = false;
-                }
+                //} // CPM I reject this feature
             }
 
             entityID = Entities.addEntity(properties);
@@ -1373,18 +1373,18 @@ function setupModelMenus() {
         afterItem: "Parent Entity to Last"
     });
 
-    Menu.addMenuItem({
-        menuName: GRABBABLE_ENTITIES_MENU_CATEGORY,
-        menuItemName: MENU_CREATE_ENTITIES_GRABBABLE,
-        afterItem: "Unparent Entity",
-        isCheckable: true,
-        isChecked: Settings.getValue(SETTING_EDIT_PREFIX + MENU_CREATE_ENTITIES_GRABBABLE, true)
-    });
+    //Menu.addMenuItem({
+    //    menuName: GRABBABLE_ENTITIES_MENU_CATEGORY,
+    //    menuItemName: MENU_CREATE_ENTITIES_GRABBABLE,
+    //    afterItem: "Unparent Entity",
+    //    isCheckable: true,
+    //    isChecked: Settings.getValue(SETTING_EDIT_PREFIX + MENU_CREATE_ENTITIES_GRABBABLE, true)
+    //});
 
     Menu.addMenuItem({
         menuName: "Edit",
         menuItemName: MENU_ALLOW_SELECTION_LARGE,
-        afterItem: MENU_CREATE_ENTITIES_GRABBABLE,
+        afterItem: "Unparent Entity", // CPM MENU_CREATE_ENTITIES_GRABBABLE,
         isCheckable: true,
         isChecked: Settings.getValue(SETTING_EDIT_PREFIX + MENU_ALLOW_SELECTION_LARGE, true)
     });
@@ -1488,7 +1488,7 @@ function cleanupModelMenus() {
     Menu.removeMenuItem("Edit", MENU_EASE_ON_FOCUS);
     Menu.removeMenuItem("Edit", MENU_SHOW_LIGHTS_AND_PARTICLES_IN_EDIT_MODE);
     Menu.removeMenuItem("Edit", MENU_SHOW_ZONES_IN_EDIT_MODE);
-    Menu.removeMenuItem("Edit", MENU_CREATE_ENTITIES_GRABBABLE);
+ //    Menu.removeMenuItem("Edit", MENU_CREATE_ENTITIES_GRABBABLE); // CPM I reject this feature
 }
 
 Script.scriptEnding.connect(function () {
@@ -1852,8 +1852,8 @@ function handleMenuEvent(menuItem) {
         entityIconOverlayManager.setVisible(isActive && Menu.isOptionChecked(MENU_SHOW_LIGHTS_AND_PARTICLES_IN_EDIT_MODE));
     } else if (menuItem === MENU_SHOW_ZONES_IN_EDIT_MODE) {
         Entities.setDrawZoneBoundaries(isActive && Menu.isOptionChecked(MENU_SHOW_ZONES_IN_EDIT_MODE));
-    } else if (menuItem === MENU_CREATE_ENTITIES_GRABBABLE) {
-        Settings.setValue(SETTING_EDIT_PREFIX + menuItem, Menu.isOptionChecked(menuItem));
+    //} else if (menuItem === MENU_CREATE_ENTITIES_GRABBABLE) { // CPM I reject this feature
+    //    Settings.setValue(SETTING_EDIT_PREFIX + menuItem, Menu.isOptionChecked(menuItem));
     }
     tooltip.show(false);
 }

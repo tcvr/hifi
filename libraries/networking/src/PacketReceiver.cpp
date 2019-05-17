@@ -147,11 +147,13 @@ QMetaMethod PacketReceiver::matchingMethodForListener(PacketType type, QObject* 
         }
     }
 
+    /* CPM This was spamming the logs
     if (methodIndex < 0) {
         qCDebug(networking) << "PacketReceiver::registerListener expected a slot with one of the following signatures:"
                  << possibleSignatures.toList() << "- but such a slot was not found."
                  << "Could not complete listener registration for type" << type;
     }
+    */
 
     Q_ASSERT(methodIndex >= 0);
 

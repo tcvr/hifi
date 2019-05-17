@@ -723,7 +723,7 @@ private:
 
     bool _loginDialogPoppedUp{ false };
     bool _desktopRootItemCreated{ false };
-    bool _developerMenuVisible{ false };
+    bool _developerMenuVisible{ true }; // CPM Force developer menu on
     QString _previousAvatarSkeletonModel;
     float _previousAvatarTargetScale;
     CameraMode _previousCameraMode;

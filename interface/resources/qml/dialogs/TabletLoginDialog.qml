@@ -114,7 +114,7 @@ FocusScope {
         Image {
             id: banner
             anchors.centerIn: parent
-            source: "../../images/high-fidelity-banner.svg"
+            source: "../../images/tivoli-banner.png" // CPM
             horizontalAlignment: Image.AlignHCenter
         }
     }
@@ -124,7 +124,7 @@ FocusScope {
         id: opaqueRect
         height: parent.height
         width: parent.width
-        opacity: 0.65
+        opacity: 1//0.65
         color: "black"
     }
 

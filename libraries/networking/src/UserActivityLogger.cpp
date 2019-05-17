@@ -22,7 +22,7 @@
 #include "NetworkLogging.h"
 
 UserActivityLogger::UserActivityLogger() {
-    _timer.start();
+    // _timer.start(); // CPM Disabled.  I don't want to send user activity to HF
 }
 
 UserActivityLogger& UserActivityLogger::getInstance() {
@@ -35,6 +35,9 @@ void UserActivityLogger::disable(bool disable) {
 }
 
 void UserActivityLogger::logAction(QString action, QJsonObject details, JSONCallbackParameters params) {
+
+    return; // CPM do not record logs. 
+
     if (_disabled.get()) {
         return;
     }

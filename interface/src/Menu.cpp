@@ -373,14 +373,14 @@ Menu::Menu() {
     connect(action, &QAction::triggered, [action] {
         auto renderConfig = qApp->getRenderEngine()->getConfiguration();
         if (renderConfig) {
-            auto mainViewJitterCamConfig = renderConfig->getConfig<JitterSample>("RenderMainView.JitterCam");
+            // auto mainViewJitterCamConfig = renderConfig->getConfig<JitterSample>("RenderMainView.JitterCam"); // CPM No jittercam wanted
             auto mainViewAntialiasingConfig = renderConfig->getConfig<Antialiasing>("RenderMainView.Antialiasing");
-            if (mainViewJitterCamConfig && mainViewAntialiasingConfig) {
+            if (mainViewAntialiasingConfig) { // CPM Was set to include jittercam (mainViewJitterCamConfig && mainViewAntialiasingConfig)
                 if (action->isChecked()) {
-                    mainViewJitterCamConfig->play();
+                    // mainViewJitterCamConfig->none(); // CPM No jitter cam wanted.  Also, was ->play();
                     mainViewAntialiasingConfig->setDebugFXAA(false);
                 } else {
-                    mainViewJitterCamConfig->none();
+                    // mainViewJitterCamConfig->none(); // CPM No jitter cam wanted.
                     mainViewAntialiasingConfig->setDebugFXAA(true);
                 }
             }
@@ -451,7 +451,7 @@ Menu::Menu() {
     MenuWrapper* textureMenu = renderOptionsMenu->addMenu(MenuOption::RenderMaxTextureMemory);
     QActionGroup* textureGroup = new QActionGroup(textureMenu);
     textureGroup->setExclusive(true);
-    textureGroup->addAction(addCheckableActionToQMenuAndActionHash(textureMenu, MenuOption::RenderMaxTextureAutomatic, 0, true));
+    textureGroup->addAction(addCheckableActionToQMenuAndActionHash(textureMenu, MenuOption::RenderMaxTextureAutomatic, 0, false)); // CPM set to false
     textureGroup->addAction(addCheckableActionToQMenuAndActionHash(textureMenu, MenuOption::RenderMaxTexture4MB, 0, false));
     textureGroup->addAction(addCheckableActionToQMenuAndActionHash(textureMenu, MenuOption::RenderMaxTexture64MB, 0, false));
     textureGroup->addAction(addCheckableActionToQMenuAndActionHash(textureMenu, MenuOption::RenderMaxTexture256MB, 0, false));
@@ -460,7 +460,7 @@ Menu::Menu() {
     textureGroup->addAction(addCheckableActionToQMenuAndActionHash(textureMenu, MenuOption::RenderMaxTexture2048MB, 0, false));
     textureGroup->addAction(addCheckableActionToQMenuAndActionHash(textureMenu, MenuOption::RenderMaxTexture4096MB, 0, false));
     textureGroup->addAction(addCheckableActionToQMenuAndActionHash(textureMenu, MenuOption::RenderMaxTexture6144MB, 0, false));
-    textureGroup->addAction(addCheckableActionToQMenuAndActionHash(textureMenu, MenuOption::RenderMaxTexture8192MB, 0, false));
+    textureGroup->addAction(addCheckableActionToQMenuAndActionHash(textureMenu, MenuOption::RenderMaxTexture8192MB, 0, true)); // CPM set to true because power users.
     connect(textureGroup, &QActionGroup::triggered, [textureGroup] {
         auto checked = textureGroup->checkedAction();
         auto text = checked->text();

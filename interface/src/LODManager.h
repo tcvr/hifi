@@ -240,7 +240,7 @@ signals:
 private:
     LODManager();
 
-    bool _automaticLODAdjust = true;
+    bool _automaticLODAdjust = false;  // CPM Automatic LOD is a terrible experience so I turn it off by default.
 
     float _presentTime{ 0.0f }; // msec
     float _engineRunTime{ 0.0f }; // msec

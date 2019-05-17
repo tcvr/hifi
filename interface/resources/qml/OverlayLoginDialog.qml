@@ -81,7 +81,7 @@ FocusScope {
         Image {
             id: banner
             anchors.centerIn: parent
-            source: "../images/high-fidelity-banner.svg"
+            source: "../../images/tivoli-banner.png" // CPM Tivoli rebrand ../images/high-fidelity-banner.svg"
             horizontalAlignment: Image.AlignHCenter
         }
     }

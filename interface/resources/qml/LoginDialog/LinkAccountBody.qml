@@ -501,6 +501,9 @@ Item {
             font: loginErrorMessage.font
             text: dismissButton.text
         }
+        
+        // CPM -- COMMENTED OUT THE ANONYMOUS LOGIN BYPASS
+        /*
         HifiControlsUit.Button {
             id: dismissButton
             width: dismissButtonTextMetrics.width
@@ -528,6 +531,7 @@ Item {
                 root.tryDestroy();
             }
         }
+        */
     }
 
     Connections {

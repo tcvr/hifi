@@ -15,12 +15,12 @@ macro(SET_PACKAGING_PARAMETERS)
   set(PR_BUILD 0)
   set(PRODUCTION_BUILD 0)
   set(DEV_BUILD 0)
-  set(BUILD_GLOBAL_SERVICES "DEVELOPMENT")
+  set(BUILD_GLOBAL_SERVICES "PRODUCTION") # CPM was "DEVELOPMENT")
   set(USE_STABLE_GLOBAL_SERVICES 0)
   set(BUILD_NUMBER 0)
   set(APP_USER_MODEL_ID "com.highfidelity.console-dev")
 
-  set_from_env(RELEASE_TYPE RELEASE_TYPE "DEV")
+  set_from_env(RELEASE_TYPE RELEASE_TYPE "PRODUCTION") #CPM this was "DEV"
   set_from_env(RELEASE_NUMBER RELEASE_NUMBER "")
   set_from_env(STABLE_BUILD STABLE_BUILD 0)
 
@@ -34,11 +34,11 @@ macro(SET_PACKAGING_PARAMETERS)
   if (RELEASE_TYPE STREQUAL "PRODUCTION")
     set(DEPLOY_PACKAGE TRUE)
     set(PRODUCTION_BUILD 1)
-    set(BUILD_VERSION ${RELEASE_NUMBER})
-    set(BUILD_ORGANIZATION "High Fidelity")
+    set(BUILD_VERSION "0.82.1") #${RELEASE_NUMBER}) # CPM Release / build number
+    set(BUILD_ORGANIZATION "Tivoli Cloud VR") #CPM changed from "High Fidelity"
     set(HIGH_FIDELITY_PROTOCOL "hifi")
     set(HIGH_FIDELITY_APP_PROTOCOL "hifiapp")
-    set(INTERFACE_BUNDLE_NAME "Interface")
+    set(INTERFACE_BUNDLE_NAME "TCVR Interface")
     set(INTERFACE_ICON_PREFIX "interface")
 
     # add definition for this release type

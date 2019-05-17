@@ -53,7 +53,7 @@ LodToolsDialog::LodToolsDialog(QWidget* parent) :
     
     _lodSize = new QSlider(Qt::Horizontal, this);
     const int MAX_LOD_SIZE = 2000; // ~20:4 vision -- really good.
-    const int MIN_LOD_SIZE = 5; // ~20:1600 vision -- really bad!
+    const int MIN_LOD_SIZE = 250; // CPM changed from 5 to 250.  I don't want things to disappear.  Original comment said //~20:1600 vision -- really bad!
     const int STEP_LOD_SIZE = 1;
     const int PAGE_STEP_LOD_SIZE = 100;
     const int SLIDER_WIDTH = 300;

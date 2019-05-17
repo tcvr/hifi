@@ -15,9 +15,9 @@
 (function() { // BEGIN LOCAL_SCOPE
 
 // setup the local sound we're going to use
-var connectSound = SoundCache.getSound(Script.resolvePath("assets/sounds/hello.wav"));
-var disconnectSound = SoundCache.getSound(Script.resolvePath("assets/sounds/goodbye.wav"));
-var micMutedSound = SoundCache.getSound(Script.resolvePath("assets/sounds/goodbye.wav"));
+var connectSound = SoundCache.getSound(Script.resolvePath("assets/sounds/366102__original-sound__confirmation-upward.wav"));
+    var disconnectSound = SoundCache.getSound(Script.resolvePath("assets/sounds/366104__original-sound__confirmation-downward.wav"));
+    var micMutedSound = SoundCache.getSound(Script.resolvePath("assets/sounds/171697__nenadsimic__menu-selection-click.wav"));
 
 // setup the options needed for that sound
 var soundOptions = {
